@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="Questionpage.css">
+	<title>First Test</title>
+</head>
+<body>
+	<form onsubmit="return false" id="form_question_1">
+		<fieldset>
+			<legend>
+				Question 1
+			</legend>
+			<label>Bạn có nhớ ngày sinh của người đã gửi cho bạn link web này không? <br> Nếu thì hãy cho biết là ngày tháng năm nào?</label> 
+			<br>
+			<input type="checkbox" id="yes_answer">
+			<label>Có chứ</label>
+			<input type="text" id="text_answer">
+			<br>
+			<input type="checkbox" id="no_answer"> 
+			<label>Không nhớ làm gì cho nặng đầu</label>
+			<br>
+			<button type="button" id="submit_answer">Gửi đáp án</button>
+		</fieldset>
+	</form>
+</body>
+<script>
+	var yes_choose = document.querySelector('input[id="yes_answer"]')
+	var no_choose = document.querySelector('input[id="no_answer"]')
+	var	text_answer = document.getElementById('text_answer')
+	var submitbutton = document.getElementById('submit_answer')
+	var a = false, b = false
+	const kiem_tra_ngay_sinh = ['27112008', '271108', '27 11 2008', '27 11 08']
+	var form_1 = document.getElementById('form_question_1')
+	text_answer.style.visibility = 'hidden'
+	yes_choose.addEventListener('change', () => {
+		if (yes_choose.checked) {
+			no_choose.checked = false
+			text_answer.style.visibility = 'visible'
+			text_answer.value = 'không nhập ký tự đặc biệt như /'
+			a = true
+		} else {
+			a = false
+			text_answer.style.visibility = 'hidden'
+		}
+	})
+	no_choose.addEventListener('change', () => {
+		if (no_choose) {
+			a = false
+			yes_choose.checked = false
+			text_answer.style.visibility = 'hidden'
+		}
+	})
+	text_answer.onclick = function () {
+		text_answer.value = ''
+	}
+	submitbutton.onclick = function () {
+		for (let i = 0; i <= kiem_tra_ngay_sinh.length; i++) {
+			if (text_answer.value == kiem_tra_ngay_sinh[i]) {
+				form_1.style.visibility = 'hidden'
+				text_answer.style.visibility = 'hidden'
+				alert('Đúng là bạn tốt =)')
+				b = true
+				break
+			} else {
+				b = false
+			}
+		}
+		if (b == false) {
+			alert('BẠN TỐT! BẠN TỐT! =)')
+			form_1.style.visibility = 'hidden'
+			text_answer.style.visibility = 'hidden'			
+		}
+	}
+</script>
+</html>
